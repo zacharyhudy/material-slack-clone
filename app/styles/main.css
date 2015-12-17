@@ -3,7 +3,7 @@ body {
 }
 
 .page-wrapper {
-  max-width:550px;
+  max-width:750px;
   margin-right: auto;
   margin-left: auto;
   padding:15px;
@@ -205,3 +205,26 @@ body {
   font-weight: normal;
   font-size:10px;
 }
+
+
+.mdl-layout__header-row a{
+  color: white;
+  text-decoration: none;
+}
+.mdl-layout__header-row a:hover{
+  text-decoration: none;
+}
+.demo-layout-transparent {
+  background: url('../images/header.jpg') center / cover;
+}
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+  /* This background is dark, so we set text to white. Use 87% black instead if
+     your background is light. */
+  color: white;
+}
+
+
+
+
+
