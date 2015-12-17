@@ -27,7 +27,7 @@ angular
         resolve: {
           requireNoAuth: function($state, Auth){
             return Auth.$requireAuth().then(function(auth){
-              $state.go('home');
+              $state.go('profile');
             }, function(error){
               return
             });
@@ -41,7 +41,7 @@ angular
         resolve: {
           requireNoAuth: function($state, Auth){
             return Auth.$requireAuth().then(function(auth){
-              $state.go('home');
+              $state.go('profile');
             }, function(error){
               return
             });
@@ -50,10 +50,12 @@ angular
       })
       .state('profile',{
         url: '/profile',
+        controller: 'ProfileCtrl as profileCtrl',
+        templateUrl: 'users/profile.html',
         resolve: {
           auth: function($state, Users, Auth){
             return Auth.$requireAuth().catch(function(){
-              $state.go('home');
+              $state.go('profile');
             });
           },
           profile: function(Users, Auth){
@@ -66,4 +68,4 @@ angular
 
     $urlRouterProvider.otherwise('/');
   })
-  .constant('FirebaseUrl', 'https://intense-torch-9104.firebaseio.com/');
+  .constant('FirebaseUrl', 'https://db-4.firebaseio.com/');

@@ -1,5 +1,5 @@
 angular.module('angularfireSlackApp')
-	.factory('Users', function($firebaseArray, %firebaseObject, FirebaseUrl){
+	.factory('Users', function($firebaseArray, $firebaseObject, FirebaseUrl){
 		var usersRef = new Firebase(FirebaseUrl+'users');
 		var users = $firebaseArray(usersRef);
 
@@ -10,7 +10,7 @@ angular.module('angularfireSlackApp')
 			getDisplayName: function(uid){
 				return users.$getRecord(uid).displayName;
 			},
-			all: users;
+			all: users
 		};
 	
 		return Users;
