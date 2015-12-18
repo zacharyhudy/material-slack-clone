@@ -9,13 +9,18 @@
   </div>
 
   <form ng-submit="authCtrl.login()">
-    <div class="input-group">
-      <input type="email" class="form-control" ng-model="authCtrl.user.email" placeholder="Email">
+    <div class="input-field col s6">
+      <input id="email" type="email" class="form-control validate" ng-model="authCtrl.user.email">
+      <label for="email">Email</label>
     </div>
-    <div class="input-group">
-      <input type="password" class="form-control" ng-model="authCtrl.user.password" placeholder="Password">
+
+    <div class="input-field col s6">
+      <input id="password" type="password" class="form-control validate" ng-model="authCtrl.user.password">
+      <label for="password">Passowrd</label>
     </div>
-    <input type="submit" class="btn btn-default" value="Log In">
+
+    <button class="btn waves-effect waves-light" type="submit">Log In</button>
+
   </form>
 
 </div>

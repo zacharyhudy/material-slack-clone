@@ -27,7 +27,7 @@ angular
         resolve: {
           requireNoAuth: function($state, Auth){
             return Auth.$requireAuth().then(function(auth){
-              $state.go('profile');
+              $state.go('channels');
             }, function(error){
               return
             });
@@ -41,7 +41,7 @@ angular
         resolve: {
           requireNoAuth: function($state, Auth){
             return Auth.$requireAuth().then(function(auth){
-              $state.go('profile');
+              $state.go('home');
             }, function(error){
               return
             });
@@ -62,6 +62,47 @@ angular
             return Auth.$requireAuth().then(function(auth){
               return Users.getProfile(auth.uid).$loaded();
             });
+          }
+        }
+      })
+      .state('channels', {
+        url: '/channels',
+        controller: 'ChannelsCtrl as channelsCtrl',
+        templateUrl: 'channels/index.html',
+        resolve: {
+          channels: function(Channels){
+            return Channels.$loaded();
+          },
+          profile: function($state, Auth, Users){
+            return Auth.$requireAuth().then(function(auth){
+              return Users.getProfile(auth.uid).$loaded().then(function(profile){
+                if(profile.displayName){
+                  return profile;
+                } else{
+                  $state.go('profile');
+                }
+              });
+            }, function(error){
+              $state.go('home');
+            });
+          }
+        }
+      })
+      .state('channels.create', {
+        url: '/create',
+        templateUrl: 'channels/create.html',
+        controller: 'ChannelsCtrl as channelsCtrl'
+      })
+      .state('channels.messages', {
+        url: '/{channelId}/messages',
+        templateUrl: 'channels/messages.html',
+        controller: 'MessagesCtrl as messagesCtrl',
+        resolve: {
+          messages: function($stateParams, Messages){
+            return Messages.forChannel($stateParams.channelId).$loaded();
+          },
+          channelName: function($stateParams, channels){
+            return '#'+channels.$getRecord($stateParams.channelId).name;
           }
         }
       });
